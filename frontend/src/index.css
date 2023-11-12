@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
+html, body, #root, .app, .content {
+  height: 100%;
+  width: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.app {
+  display: flex;
+  position: relative;
+}
+
+::-webkit-scrollbar{
+  width : 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track{
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb{
+  background: #bdbdbd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover{
+  background: #757575;
+}
+
+/* Formik form */
+.css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:focus {
+  outline: 2px solid #757575 !important;
+}
+
+.css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #141b2b inset !important;
+}
+
+.css-ngnk4o-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #757575 !important;
+  background: #141b2b !important;
+}
+
+.css-2nzw3n-MuiTypography-root {
+line-height: 2.5rem !important;
+}
+

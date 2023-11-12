@@ -1,0 +1,51 @@
+.form-label{
+    color: #FFF;
+    font-family: Arial, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 10%;
+}
+
+.form-row{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.user-invite-form{
+    padding: 20px;
+    margin: 20px;
+}
+
+.input-text{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #FFF;
+    background: transparent;
+    width: 60%;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.input-select{
+    border: 1px solid #FFF;
+    background: transparent;
+    width: 20%;
+    color: #FFF;
+    height: 30px;
+    background-color: #12182D;
+    font-size: 15px;
+}
+
+.invite-button{
+    width: 234px;
+    height: 50px;
+    border-radius: 9px;
+    border: none;
+    font-size: 18px;
+}
+
+.invite-button-icon{
+    margin-right: 15px;
+}
