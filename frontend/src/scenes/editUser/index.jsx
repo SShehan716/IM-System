@@ -33,8 +33,8 @@ const userSchema = yup.object().shape({
 
 const validationMessages = {
   submit: {
-    success: 'User invited successfully',
-    error: 'Invite failed',
+    success: 'User updated successfully',
+    error: 'User update failed',
     cError: 'Unknown error',
   },
 };
@@ -44,9 +44,9 @@ const EditUser = () => {
 
   const handleOnSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
     try {
-      const response = await axios.post('http://localhost:5000/invite-user', values);
+      const response = await axios.put('http://localhost:5000/update-user/1', values);
 
-      if (response.data.message === 'User Invited') {
+      if (response.data.message === 'User updated successfully') {
         // Registration was successful
         setSuccessMessage(validationMessages.submit.success);
         resetForm();
@@ -152,7 +152,7 @@ const EditUser = () => {
                 </Box>
                 <Box>
                   <Button type="submit" color="secondary" variant="contained">
-                    Invite New User
+                    Update User
                   </Button>
                 </Box>
 
