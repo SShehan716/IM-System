@@ -21,7 +21,6 @@ const checkUserRole = () => {
 const initialValues = {
   FullName: '',
   Email: '',
-  Password: '',
   UserRole: '',
   University: '',
 };
@@ -29,7 +28,6 @@ const initialValues = {
 const userSchema = yup.object().shape({
   FullName: yup.string().required('Required'),
   Email: yup.string().email("Invaild email").required('Required'),
-  Password: yup.string().required('Required'),
   UserRole: yup.string().required('Required'),
 });
 
@@ -41,7 +39,7 @@ const validationMessages = {
   },
 };
 
-const InviteUser = () => {
+const EditUser = () => {
   const [successMessage, setSuccessMessage] = useState(null);
 
   const handleOnSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -72,8 +70,7 @@ const InviteUser = () => {
   if (checkUserRole()) {
     return (
       <Box m="20px">
-        <Header title="Invite User" subTitle="Enter User Details" />
-
+        <Header title="Edit User" subTitle="Enter New User Details" />
         <Formik
           onSubmit={handleOnSubmit}
           initialValues={initialValues}
@@ -112,18 +109,6 @@ const InviteUser = () => {
                   onBlur={handleBlur}
                   error={!!touched.Email && !!errors.Email}
                   helperText={touched.Email && errors.Email}
-                  sx={{ gridColumn: "span 2" }} />
-                <TextField
-                  fullWidth
-                  label="Password"
-                  name="Password"
-                  type="password"
-                  autoComplete="new-password"
-                  value={values.Password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={!!touched.Password && !!errors.Password}
-                  helperText={touched.Password && errors.Password}
                   sx={{ gridColumn: "span 2" }} />
                 <TextField
                   fullWidth
@@ -187,4 +172,4 @@ const InviteUser = () => {
   }
 }
 
-export default InviteUser;
+export default EditUser;

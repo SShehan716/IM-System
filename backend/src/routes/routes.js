@@ -26,6 +26,7 @@ router.post('/login', login);
 router.post('/invite-user', inviteUser);
 router.get('/get-all-user-data', manageTeam);
 router.get('/get-user-by-id/:userId', manageTeam);
+router.put('/update-user/:userId', manageTeam);
 
 //export router
 module.exports = router;
