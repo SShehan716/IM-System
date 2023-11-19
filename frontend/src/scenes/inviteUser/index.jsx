@@ -106,7 +106,7 @@ const InviteUser = () => {
                   label="Email"
                   name="Email"
                   type="email"
-                  autoComplete="off"
+                  autoComplete="new-password"
                   value={values.Email}
                   onChange={handleChange}
                   onBlur={handleBlur}

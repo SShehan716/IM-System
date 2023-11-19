@@ -8,6 +8,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import OutboxOutlinedIcon from '@mui/icons-material/OutboxOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined';
+import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -33,9 +34,27 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [userDetails, setUserDetails] = useState([]);
   const token = localStorage.getItem('token');
   const payload = JSON.parse(atob(token.split('.')[1])); 
   const role = payload.Role;
+  const userId = payload.id;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/get-user-by-id/${userId}`);
+        const data = await response.json();
+        setUserDetails(data.user);
+        console.log(userDetails);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
 
 
   return (
@@ -100,7 +119,7 @@ const Sidebar = () => {
                 />
               </Box>
               <Box textAlign="center">
-                <Typography variant="h5" color={colors.grey[100]} fontWeight="bold" sx={{ m: "10px 0 0 0" }}>Sachin Shehan</Typography>
+                <Typography variant="h5" color={colors.grey[100]} fontWeight="bold" sx={{ m: "10px 0 0 0" }}>{userDetails.FullName}</Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>{role}</Typography>
               </Box>
             </Box>

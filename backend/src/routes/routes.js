@@ -24,7 +24,8 @@ router.get('/', (req, res) => {
 //routes
 router.post('/login', login);
 router.post('/invite-user', inviteUser);
-router.get('/manage-team', manageTeam);
+router.get('/get-all-user-data', manageTeam);
+router.get('/get-user-by-id/:userId', manageTeam);
 
 //export router
 module.exports = router;
