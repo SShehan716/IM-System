@@ -10,7 +10,9 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useNavigate } from 'react-router-dom';
 
+let userID;
 
 const ManageTeam = () => {
   const theme = useTheme();
@@ -31,6 +33,11 @@ const ManageTeam = () => {
     fetchData();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleButtonClick = (userID) => {
+    navigate(`/edit-user/${userID}`);
+  };
 
   const columns = [
     { field: "UserID", headerName: "ID" },
@@ -103,7 +110,8 @@ const ManageTeam = () => {
               aria-label="edit user"
               component="span"
               onClick={() => {
-                console.log(UserID);
+                console.log(UserID)
+                handleButtonClick(UserID)
               }}
             >
               <EditOutlinedIcon />

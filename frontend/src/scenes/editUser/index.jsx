@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import Header from '../../components/Header';
 import axios from 'axios';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const checkUserRole = () => {
   const token = localStorage.getItem('token');
@@ -41,10 +42,11 @@ const validationMessages = {
 
 const EditUser = () => {
   const [successMessage, setSuccessMessage] = useState(null);
-
+  const { userID } = useParams()
+  console.log(userID);
   const handleOnSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
     try {
-      const response = await axios.put('http://localhost:5000/update-user/1', values);
+      const response = await axios.put(`http://localhost:5000/update-user/${userID}`, values);
 
       if (response.data.message === 'User updated successfully') {
         // Registration was successful

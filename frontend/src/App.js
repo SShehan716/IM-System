@@ -31,7 +31,7 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/invite-user" element={<InviteUser />} />
-              <Route path="/edit-user" element={<EditUser />} />
+              <Route path="/edit-user/:userID" element={<EditUser />} />
               <Route path="/manage-team" element={<ManageUsers />} />
               <Route path="/login" element={<Login />} />
             </Routes>

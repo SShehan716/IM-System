@@ -46,7 +46,6 @@ const Sidebar = () => {
         const response = await fetch(`http://localhost:5000/get-user-by-id/${userId}`);
         const data = await response.json();
         setUserDetails(data.user);
-        console.log(userDetails);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
