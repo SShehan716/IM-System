@@ -8,6 +8,7 @@ import InviteUser from "./scenes/inviteUser";
 import Login from "./scenes/login";
 import ManageUsers from './scenes/manageUsers';
 import EditUser from './scenes/editUser';
+import ManageInterns from './scenes/manageInterns';
 
 
 import './App.css';
@@ -33,6 +34,7 @@ function App() {
               <Route path="/invite-user" element={<InviteUser />} />
               <Route path="/edit-user/:userID" element={<EditUser />} />
               <Route path="/manage-team" element={<ManageUsers />} />
+              <Route path="/manage-interns" element={<ManageInterns />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </main>

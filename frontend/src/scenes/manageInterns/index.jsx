@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useNavigate } from 'react-router-dom';
 
-const ManageTeam = () => {
+const ManageInterns = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -23,7 +23,12 @@ const ManageTeam = () => {
       try {
         const response = await fetch("http://localhost:5000/get-all-user-data");
         const data = await response.json();
-        setUserData(data.users);
+
+        //Filter only interns data
+        const interns = data.users.filter((user) => user.UserRole === "Intern");
+
+        console.log(interns);
+        setUserData(interns);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -51,46 +56,17 @@ const ManageTeam = () => {
       flex: 1,
     },
     {
-      field: "UserRole",
-      headerName: "Access Level",
-      flex: 0.9,
-      renderCell: ({ row: { UserRole } }) => {
-        return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              UserRole === "Admin"
-                ? colors.greenAccent[600]
-                : UserRole === "Management"
-                  ? colors.greenAccent[700]
-                  : UserRole === "Intern"
-                    ? colors.greenAccent[500]
-                    : UserRole === "Evaluator"
-                      ? colors.greenAccent[800]
-                      : UserRole === "Mentor"
-                        ? colors.greenAccent[900]
-                        : colors.grey[700]
-            }
-            borderRadius="4px"
-          >
-            {UserRole === "Admin" && <AdminPanelSettingsOutlinedIcon />}
-            {UserRole === "Intern" && <PersonOutlineOutlinedIcon />}
-            {UserRole === "Management" && <LockOpenOutlinedIcon />}
-            {UserRole === "Evaluator" && <SecurityOutlinedIcon />}
-            {UserRole === "Mentor" && <ContactEmergencyOutlinedIcon />}
-
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {UserRole}
-            </Typography>
-          </Box>
-
-        );
+        field: "University",
+        headerName: "University",
+        flex: 0.9,
+        renderCell: ({ row: { InternProfile } }) => InternProfile.University,
       },
-    },
+      {
+        field: "Status",
+        headerName: "Status",
+        flex: 0.9,
+        renderCell: ({ row: { InternProfile } }) => InternProfile.Status,
+      },
     {
       field: "Edit", headerName: "Edit", flex: 0.4, renderCell: ({ row: { UserID } }) => {
         return (
@@ -122,7 +98,7 @@ const ManageTeam = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="Manage Interns" subtitle="Managing the Team Members" />
 
       <Box
         m="40px 0 0 0"
@@ -159,4 +135,4 @@ const ManageTeam = () => {
   );
 };
 
-export default ManageTeam;
+export default ManageInterns;

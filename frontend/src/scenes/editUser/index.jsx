@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import axios from 'axios';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const checkUserRole = () => {
   const token = localStorage.getItem('token');
@@ -42,8 +43,30 @@ const validationMessages = {
 
 const EditUser = () => {
   const [successMessage, setSuccessMessage] = useState(null);
-  const { userID } = useParams()
-  console.log(userID);
+  const [userData, setUserData] = useState(null);
+  const { userID } = useParams();
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/get-user-by-id/${userID}`);
+        setUserData(response.data.user);
+        console.log(userData);
+
+        initialValues.FullName = response.data.user.FullName;
+        initialValues.Email = response.data.user.Email;
+        initialValues.UserRole = response.data.user.UserRole;
+        initialValues.University = response.data.user.InternProfile.University;
+
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserDetails();
+  },[]);
+
+
   const handleOnSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
     try {
       const response = await axios.put(`http://localhost:5000/update-user/${userID}`, values);
@@ -75,7 +98,7 @@ const EditUser = () => {
         <Header title="Edit User" subTitle="Enter New User Details" />
         <Formik
           onSubmit={handleOnSubmit}
-          initialValues={initialValues}
+          initialValues={ initialValues }
           validationSchema={userSchema}>
           {({
             values,
