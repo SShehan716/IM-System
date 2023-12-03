@@ -12,7 +12,6 @@ const User = require('../models/user');
 const Role = require('../models/role');
 const InternProfile = require('../models/InternProfile');
 const mentorProfile = require('../models/mentorprofile');
-const evaluatorProfile = require('../models/evaluatorprofile');
 const login = require('../api/login');
 const inviteUser = require('../api/inviteUser');
 const manageTeam = require('../api/manageTeam');

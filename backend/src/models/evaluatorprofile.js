@@ -8,6 +8,10 @@ const EvaluatorProfile = sequelize.define('EvaluatorProfile', {
     primaryKey: true,
     autoIncrement: true,
   },
+  Designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 User.hasOne(EvaluatorProfile, { foreignKey: 'UserID' });

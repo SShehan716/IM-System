@@ -8,6 +8,10 @@ const MentorProfile = sequelize.define('MentorProfile', {
     primaryKey: true,
     autoIncrement: true,
   },
+  Designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 User.hasOne(MentorProfile, { foreignKey: 'UserID' });

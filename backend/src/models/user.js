@@ -23,6 +23,10 @@ const User = sequelize.define('User', {
   UserRole: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  companyId: {
+    type: DataTypes.INTEGER,
+    allowNull: true, // Modify this based on your requirements
   }
 });
 
