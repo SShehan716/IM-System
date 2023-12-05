@@ -11,11 +11,10 @@ const { Strategy: JwtStrategy, ExtractJwt } = passportJwt;
 
 //models
 const User = require('../models/user');
-const Role = require('../models/role');
-const AdminProfile = require('../models/adminprofile');
+const AdminProfile = require('../models/adminProfile');
 const Company = require('../models/company');
-const EvaluatorAssign = require('../models/evaluatorassign');
-const EvaluatorProfile = require('../models/evaluatorProfile');
+const EvaluatorAssign = require('../models/evaluatorAssign');
+const EvaluatorProfile = require('../models/evaluatorprofile');
 const InternProfile = require('../models/InternProfile');
 const ManagementProfile = require('../models/managemnetProfile');
 const MentorAssign = require('../models/mentorAssign');

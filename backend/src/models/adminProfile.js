@@ -3,10 +3,18 @@ const sequelize = require('../database');
 const User = require('./user');
 
 const AdminProfile = sequelize.define('AdminProfile', {
-  AdminID: {
+  AdminProfileID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  CanCreateAccounts: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+  },
+  Designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });
 

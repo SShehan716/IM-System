@@ -8,6 +8,10 @@ const ManagementProfile = sequelize.define('ManagementProfile', {
     primaryKey: true,
     autoIncrement: true,
   },
+  Designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 User.hasOne(ManagementProfile, { foreignKey: 'UserID' });

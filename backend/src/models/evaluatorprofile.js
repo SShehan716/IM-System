@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
-const User = require('./user'); // Import the User model
+const User = require('./user');
 
 const EvaluatorProfile = sequelize.define('EvaluatorProfile', {
   EvaluatorID: {

@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const User = require('../models/user');
 const InternProfile = require('../models/InternProfile');
-const Role = require('../models/role');
 
 const router = express.Router();
 router.use(cors());

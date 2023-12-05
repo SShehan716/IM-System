@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
-const Role = require('./role');
+const Company = require('./company');
 
 const User = sequelize.define('User', {
   UserID: {
@@ -26,10 +26,11 @@ const User = sequelize.define('User', {
   },
   companyId: {
     type: DataTypes.INTEGER,
-    allowNull: true, // Modify this based on your requirements
+    allowNull: true, 
   }
 });
 
+User.belongsTo(Company, { foreignKey: 'companyId' });
 //User.belongsToMany(Role, { through: 'UserRole', foreignKey: 'UserID' });
 //Role.belongsToMany(User, { through: 'UserRole', foreignKey: 'RoleID' });
 

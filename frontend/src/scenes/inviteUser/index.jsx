@@ -24,6 +24,7 @@ const initialValues = {
   Password: '',
   UserRole: '',
   University: '',
+  Designation: '',
 };
 
 const userSchema = yup.object().shape({

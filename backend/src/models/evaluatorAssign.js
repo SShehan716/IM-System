@@ -5,11 +5,7 @@ const EvaluatorProfile = require('./evaluatorProfile');
 const InternProfile = require('./InternProfile');
 
 const EvaluatorAssign = sequelize.define('EvaluatorAssign', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+
 });
 
 EvaluatorProfile.hasMany(EvaluatorAssign, { foreignKey: 'EvaluatorID' });

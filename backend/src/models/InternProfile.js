@@ -28,7 +28,4 @@ const InternProfile = sequelize.define('InternProfile', {
 User.hasOne(InternProfile, { foreignKey: 'UserID' });
 InternProfile.belongsTo(User, { foreignKey: 'UserID' });
 
-User.hasMany(InternProfile, { foreignKey: 'MentorID', as: 'Interns' });
-InternProfile.belongsTo(User, { foreignKey: 'MentorID', as: 'Mentor' });
-
 module.exports = InternProfile;
