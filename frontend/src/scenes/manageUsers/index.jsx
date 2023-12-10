@@ -57,25 +57,8 @@ const ManageTeam = () => {
       renderCell: ({ row: { UserRole } }) => {
         return (
           <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
             display="flex"
             justifyContent="center"
-            backgroundColor={
-              UserRole === "Admin"
-                ? colors.greenAccent[600]
-                : UserRole === "Management"
-                  ? colors.greenAccent[700]
-                  : UserRole === "Intern"
-                    ? colors.greenAccent[500]
-                    : UserRole === "Evaluator"
-                      ? colors.greenAccent[800]
-                      : UserRole === "Mentor"
-                        ? colors.greenAccent[900]
-                        : colors.grey[700]
-            }
-            borderRadius="4px"
           >
             {UserRole === "Admin" && <AdminPanelSettingsOutlinedIcon />}
             {UserRole === "Intern" && <PersonOutlineOutlinedIcon />}
@@ -96,8 +79,6 @@ const ManageTeam = () => {
         return (
           <Box
             width="60%"
-            m="0 auto"
-            p="5px"
             display="flex"
             justifyContent="center"
             backgroundColor={colors.blueAccent[600]}
@@ -153,7 +134,7 @@ const ManageTeam = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={userData} columns={columns} getRowId={(row) => row.UserID} />
+        <DataGrid rows={userData} columns={columns} getRowId={(row) => row.UserID} />
       </Box>
     </Box>
   );

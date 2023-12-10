@@ -8,6 +8,8 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import OutboxOutlinedIcon from '@mui/icons-material/OutboxOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined';
+import DirectionsWalkOutlinedIcon from '@mui/icons-material/DirectionsWalkOutlined';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -36,7 +38,7 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const [userDetails, setUserDetails] = useState([]);
   const token = localStorage.getItem('token');
-  const payload = JSON.parse(atob(token.split('.')[1])); 
+  const payload = JSON.parse(atob(token.split('.')[1]));
   const role = payload.Role;
   const userId = payload.id;
 
@@ -54,27 +56,55 @@ const Sidebar = () => {
     fetchUserData();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      // Make a request to your server-side logout API
+      const response = await fetch('http://localhost:5000/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.ok) {
+        // Clear the token from localStorage
+        localStorage.removeItem('token');
+        // Redirect to the login page or perform any other necessary actions
+        window.location.href = '/login'; // Example: Redirect to the login page
+      } else {
+        console.error('Logout failed:', response.statusText);
+        // Handle logout failure (display an error message, etc.)
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Handle unexpected errors during logout
+    }
+  };
 
 
   return (
     <Box
-    sx={{
-      "& .pro-sidebar-inner": {
-        background: `${colors.primary[400]} !important`,
-      },
-      "& .pro-icon-wrapper": {
-        backgroundColor: "transparent !important",
-      },
-      "& .pro-inner-item": {
-        padding: "5px 35px 5px 20px !important",
-      },
-      "& .pro-inner-item:hover": {
-        color: "#868dfb !important",
-      },
-      "& .pro-menu-item.active": {
-        color: "#6870fa !important",
-      },
-    }}
+      sx={{
+        "& .pro-sidebar-inner": {
+          background: `${colors.primary[400]} !important`,
+          position: "fixed !important",
+          top: "0 !important",
+          bottom: "0 !important",
+        },
+        "& .pro-icon-wrapper": {
+          backgroundColor: "transparent !important",
+        },
+        "& .pro-inner-item": {
+          padding: "5px 35px 5px 20px !important",
+        },
+        "& .pro-inner-item:hover": {
+          color: "#868dfb !important",
+        },
+        "& .pro-menu-item.active": {
+          color: "#6870fa !important",
+        },
+      }}
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
@@ -129,10 +159,29 @@ const Sidebar = () => {
             <Item title="Dashboard" to="/dashboard" icon={<HomeOutlinedIcon />} selected={selected} setSelected={setSelected} />
             <Item title="Invite User" to="/invite-user" icon={<OutboxOutlinedIcon />} selected={selected} setSelected={setSelected} />
             <Item title="Manage Team" to="/manage-team" icon={<Groups2OutlinedIcon />} selected={selected} setSelected={setSelected} />
-            <Item title="Manage Interns" to="/manage-interns" icon={<Groups2OutlinedIcon />} selected={selected} setSelected={setSelected} />
+            <Item title="Manage Interns" to="/manage-interns" icon={<DirectionsWalkOutlinedIcon />} selected={selected} setSelected={setSelected} />
 
           </Box>
 
+          {/* Logout Button */}
+          <MenuItem
+            style={{
+              color: colors.grey[100],
+              cursor: "pointer",
+              marginBottom: "10px",
+              bottom: "0",
+              position: "absolute",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onClick={handleLogout}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <ExitToAppOutlinedIcon fontSize="small" style={{ marginRight: '5px' }} />
+              <Typography>Logout</Typography>
+            </Box>
+          </MenuItem>
         </Menu>
       </ProSidebar>
     </Box>

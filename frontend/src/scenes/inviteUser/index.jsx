@@ -9,7 +9,7 @@ const checkUserRole = () => {
   const token = localStorage.getItem('token');
   if (token) {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); 
+      const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.Role === 'Admin';
     } catch (error) {
       console.error('Error decoding JWT token:', error);
@@ -160,6 +160,21 @@ const InviteUser = () => {
                     sx={{ gridColumn: "span 2" }}
                   />
                 )}
+                {['Admin', 'Evaluator', 'Mentor', 'Management'].includes(
+                  values.UserRole
+                ) && (
+                    <TextField
+                      fullWidth
+                      label="Designation"
+                      name="Designation"
+                      value={values.Designation}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={!!touched.Designation && !!errors.Designation}
+                      helperText={touched.Designation && errors.Designation}
+                      sx={{ gridColumn: "span 2" }}
+                    />
+                  )}
               </Box>
               <Box display="flex" mt="20px" justifyContent="space-between" >
                 <Box>
@@ -181,7 +196,7 @@ const InviteUser = () => {
   } else {
     return (
       <Box m="20px">
-        <Header title="Access Denined"/>
+        <Header title="Access Denined" />
         <Typography variant="h4" color="error">You are not authorized to access this page</Typography>
       </Box>
     )

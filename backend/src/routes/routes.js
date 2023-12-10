@@ -11,14 +11,14 @@ const { Strategy: JwtStrategy, ExtractJwt } = passportJwt;
 
 //models
 const User = require('../models/user');
-const AdminProfile = require('../models/adminProfile');
+const AdminProfile = require('../models/AdminProfile');
 const Company = require('../models/company');
 const EvaluatorAssign = require('../models/evaluatorAssign');
-const EvaluatorProfile = require('../models/evaluatorprofile');
+const EvaluatorProfile = require('../models/EvaluatorProfile');
 const InternProfile = require('../models/InternProfile');
 const ManagementProfile = require('../models/managemnetProfile');
 const MentorAssign = require('../models/mentorAssign');
-const MentorProfile = require('../models/mentorprofile');
+const MentorProfile = require('../models/MentorProfile');
 
  
 
@@ -33,6 +33,7 @@ router.get('/', (req, res) => {
 
 //routes
 router.post('/login', login);
+router.post('/logout', login);
 router.post('/invite-user', inviteUser);
 router.get('/get-all-user-data', manageTeam);
 router.get('/get-user-by-id/:userId', manageTeam);

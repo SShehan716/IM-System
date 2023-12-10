@@ -39,7 +39,7 @@ const ManageInterns = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = (userID) => {
-    navigate(`/edit-user/${userID}`);
+    navigate(`/update-intern/${userID}`);
   };
 
   const columns = [
@@ -72,8 +72,6 @@ const ManageInterns = () => {
         return (
           <Box
             width="60%"
-            m="0 auto"
-            p="5px"
             display="flex"
             justifyContent="center"
             backgroundColor={colors.blueAccent[600]}
@@ -84,7 +82,6 @@ const ManageInterns = () => {
               aria-label="edit user"
               component="span"
               onClick={() => {
-                console.log(UserID)
                 handleButtonClick(UserID)
               }}
             >
@@ -98,7 +95,7 @@ const ManageInterns = () => {
 
   return (
     <Box m="20px">
-      <Header title="Manage Interns" subtitle="Managing the Team Members" />
+      <Header title="Manage Interns" subtitle="Managing the Company Interns" />
 
       <Box
         m="40px 0 0 0"
@@ -129,7 +126,7 @@ const ManageInterns = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={userData} columns={columns} getRowId={(row) => row.UserID} />
+        <DataGrid rows={userData} columns={columns} getRowId={(row) => row.UserID} />
       </Box>
     </Box>
   );

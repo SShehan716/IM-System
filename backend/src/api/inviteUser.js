@@ -4,10 +4,10 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const User = require('../models/user');
 const InternProfile = require('../models/InternProfile');
-const MentorProfile = require('../models/mentorprofile');
-const EvaluatorProfile = require('../models/evaluatorprofile');
+const MentorProfile = require('../models/MentorProfile');
+const EvaluatorProfile = require('../models/EvaluatorProfile');
 const ManagementProfile = require('../models/managemnetProfile');
-const AdminProfile = require('../models/adminProfile');
+const AdminProfile = require('../models/AdminProfile');
 
 const router = express.Router();
 router.use(cors());
@@ -20,6 +20,16 @@ router.post('/invite-user', async (req, res) => {
     UserRole,
     University,
     Designation,
+    InterviewScore,
+    InterviewFeedback,
+    Evolution1Score,
+    Evolution1Feedback,
+    Evolution2Score,
+    Evolution2Feedback,
+    Accomplishments,
+    GPA,
+    ProjectDetails,
+    AssignedTeam
   } = req.body;
 
   try {
@@ -42,6 +52,16 @@ router.post('/invite-user', async (req, res) => {
         University,
         Status: "Pending",
         UserID: newUser.UserID,
+        InterviewScore,
+        InterviewFeedback,
+        Evolution1Score,
+        Evolution1Feedback,
+        Evolution2Score,
+        Evolution2Feedback,
+        Accomplishments,
+        GPA,
+        ProjectDetails,
+        AssignedTeam
       };
       await InternProfile.create(internProfileData);
     } else if(UserRole === 'Mentor'){

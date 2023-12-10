@@ -9,6 +9,7 @@ import Login from "./scenes/login";
 import ManageUsers from './scenes/manageUsers';
 import EditUser from './scenes/editUser';
 import ManageInterns from './scenes/manageInterns';
+import UpdateIntern from './scenes/updateIntern';
 
 
 import './App.css';
@@ -33,6 +34,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/invite-user" element={<InviteUser />} />
               <Route path="/edit-user/:userID" element={<EditUser />} />
+              <Route path="/update-intern/:userID" element={<UpdateIntern />} />
               <Route path="/manage-team" element={<ManageUsers />} />
               <Route path="/manage-interns" element={<ManageInterns />} />
               <Route path="/login" element={<Login />} />

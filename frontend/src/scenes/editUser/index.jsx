@@ -11,7 +11,7 @@ const checkUserRole = () => {
   const token = localStorage.getItem('token');
   if (token) {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); 
+      const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.Role === 'Admin';
     } catch (error) {
       console.error('Error decoding JWT token:', error);
@@ -25,6 +25,7 @@ const initialValues = {
   Email: '',
   UserRole: '',
   University: '',
+  Designation: '',
 };
 
 const userSchema = yup.object().shape({
@@ -51,20 +52,29 @@ const EditUser = () => {
       try {
         const response = await axios.get(`http://localhost:5000/get-user-by-id/${userID}`);
         setUserData(response.data.user);
-        console.log(userData);
 
         initialValues.FullName = response.data.user.FullName;
         initialValues.Email = response.data.user.Email;
         initialValues.UserRole = response.data.user.UserRole;
-        initialValues.University = response.data.user.InternProfile.University;
 
+        if (response.data.user.UserRole === 'Intern') {
+          initialValues.University = response.data.user.InternProfile.University;
+        } else if (response.data.user.UserRole === 'Admin') {
+          initialValues.Designation = response.data.user.AdminProfile.Designation;
+        } else if (response.data.user.UserRole === 'Evaluator') {
+          initialValues.Designation = response.data.user.EvaluatorProfile.Designation;
+        } else if (response.data.user.UserRole === 'Mentor') {
+          initialValues.Designation = response.data.user.MentorProfile.Designation;
+        } else if (response.data.user.UserRole === 'Management') {
+          initialValues.Designation = response.data.user.ManagementProfile.Designation;
+        }
       } catch (error) {
         console.error('Error fetching user details:', error);
       }
     };
 
     fetchUserDetails();
-  },[]);
+  }, []);
 
 
   const handleOnSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -95,10 +105,10 @@ const EditUser = () => {
   if (checkUserRole()) {
     return (
       <Box m="20px">
-        <Header title="Edit User" subTitle="Enter New User Details" />
+        <Header title="Edit User" subTitle="Edit User Details" />
         <Formik
           onSubmit={handleOnSubmit}
-          initialValues={ initialValues }
+          initialValues={initialValues}
           validationSchema={userSchema}>
           {({
             values,
@@ -169,6 +179,21 @@ const EditUser = () => {
                     sx={{ gridColumn: "span 2" }}
                   />
                 )}
+                {['Admin', 'Evaluator', 'Mentor', 'Management'].includes(
+                  values.UserRole
+                ) && (
+                    <TextField
+                      fullWidth
+                      label="Designation"
+                      name="Designation"
+                      value={values.Designation}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={!!touched.Designation && !!errors.Designation}
+                      helperText={touched.Designation && errors.Designation}
+                      sx={{ gridColumn: "span 2" }}
+                    />
+                  )}
               </Box>
               <Box display="flex" mt="20px" justifyContent="space-between" >
                 <Box>
@@ -190,7 +215,7 @@ const EditUser = () => {
   } else {
     return (
       <Box m="20px">
-        <Header title="Access Denined"/>
+        <Header title="Access Denined" />
         <Typography variant="h4" color="error">You are not authorized to access this page</Typography>
       </Box>
     )
