@@ -38,5 +38,7 @@ router.post('/invite-user', inviteUser);
 router.get('/get-all-user-data', manageTeam);
 router.get('/get-user-by-id/:userId', manageTeam);
 router.put('/update-user/:userId', manageTeam);
+router.get('/get-all-mentors', manageTeam);
+router.get('/get-all-evaluators', manageTeam);
 
 module.exports = router;

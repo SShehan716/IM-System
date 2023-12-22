@@ -169,4 +169,46 @@ router.put('/update-user/:userId', async (req, res) => {
   }
 });
 
+//fetch all mentors Name, MentorId
+router.get('/get-all-mentors', async (req, res) => {
+  try {
+    const allMentors = await User.findAll({
+      attributes: ['UserID', 'FullName'],
+      include: [
+        {
+          model: MentorProfile,
+          attributes: ['Designation'],
+          required: true,
+        },
+      ],
+    });
+
+    res.json({ mentors: allMentors });
+  } catch (err) {
+    console.error('Error: ', err);
+    return res.status(500).json({ error: err });
+  }
+});
+
+//fetch all evaluators Name, EvaluatorId
+router.get('/get-all-evaluators', async (req, res) => {
+  try {
+    const allEvaluators = await User.findAll({
+      attributes: ['UserID', 'FullName'],
+      include: [
+        {
+          model: EvaluatorProfile,
+          attributes: ['Designation'],
+          required: true,
+        },
+      ],
+    });
+
+    res.json({ evaluators: allEvaluators });
+  } catch (err) {
+    console.error('Error: ', err);
+    return res.status(500).json({ error: err });
+  }
+});
+
 module.exports = router;
