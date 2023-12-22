@@ -96,7 +96,7 @@ const UpdateIntern = () => {
             const response = await axios.put(`http://localhost:5000/update-user/${userID}`, values);
 
             if (response.data.message === 'User updated successfully') {
-                // Registration was successful
+                // update was successful
                 setSuccessMessage(validationMessages.submit.success);
                 resetForm();
                 setSubmitting(false);

@@ -10,6 +10,7 @@ import ManageUsers from './scenes/manageUsers';
 import EditUser from './scenes/editUser';
 import ManageInterns from './scenes/manageInterns';
 import UpdateIntern from './scenes/updateIntern';
+import AssignMentorsEvaluators from './scenes/mentor-evaluator-assign';
 
 
 import './App.css';
@@ -38,6 +39,7 @@ function App() {
               <Route path="/manage-team" element={<ManageUsers />} />
               <Route path="/manage-interns" element={<ManageInterns />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/assign-mentors-evaluators" element={<AssignMentorsEvaluators />} />
             </Routes>
           </main>
         </div>

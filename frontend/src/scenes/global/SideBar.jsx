@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
@@ -38,9 +38,11 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const [userDetails, setUserDetails] = useState([]);
   const token = localStorage.getItem('token');
-  const payload = JSON.parse(atob(token.split('.')[1]));
+  const payload = token ? JSON.parse(atob(token.split('.')[1])) : {};
   const role = payload.Role;
   const userId = payload.id;
+  const [openDialog, setOpenDialog] = useState(false);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -57,8 +59,11 @@ const Sidebar = () => {
   }, []);
 
   const handleLogout = async () => {
+    setOpenDialog(true);
+  };
+
+  const confirmLogout = async () => {
     try {
-      // Make a request to your server-side logout API
       const response = await fetch('http://localhost:5000/logout', {
         method: 'POST',
         headers: {
@@ -68,19 +73,22 @@ const Sidebar = () => {
       });
 
       if (response.ok) {
-        // Clear the token from localStorage
         localStorage.removeItem('token');
-        // Redirect to the login page or perform any other necessary actions
-        window.location.href = '/login'; // Example: Redirect to the login page
+        window.location.href = '/login';
       } else {
         console.error('Logout failed:', response.statusText);
-        // Handle logout failure (display an error message, etc.)
       }
     } catch (error) {
       console.error('Error during logout:', error);
-      // Handle unexpected errors during logout
+    } finally {
+      setOpenDialog(false);
     }
   };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
 
 
   return (
@@ -184,6 +192,18 @@ const Sidebar = () => {
           </MenuItem>
         </Menu>
       </ProSidebar>
+
+      {/* Logout Confirmation Dialog */}
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle sx={{fontSize:18}}>Confirm Logout</DialogTitle>
+        <DialogContent>
+          <Typography sx={{fontSize:23}}>Do you want to logout?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} sx={{fontSize:16, color:colors.redAccent[300]}}>Cancel</Button>
+          <Button onClick={confirmLogout} sx={{fontSize:16, color:colors.greenAccent[500]}}>Yes</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

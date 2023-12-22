@@ -1,11 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ContactEmergencyOutlinedIcon from '@mui/icons-material/ContactEmergencyOutlined';
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
